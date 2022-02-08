@@ -4,7 +4,7 @@
 #include <fstream>
 
 
-visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std::vector<double> x_coord, std::vector<double> y_coord)  {
+visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std::vector<double> walls_x_coord, std::vector<double> wall_y_coord, std::vector<double> room_x_coord, std::vector<double> room_y_coord)  {
   visualization_msgs::MarkerArray markers;
   visualization_msgs::Marker mesh_marker;
     mesh_marker.header.frame_id = "map";
@@ -40,9 +40,9 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     Room_1.id = markers.markers.size();
     Room_1.type = visualization_msgs::Marker::CUBE;
 
-    Room_1.pose.position.x = -1.7;
-    Room_1.pose.position.y = -3.0;
-    Room_1.pose.position.z = 5.0;
+    Room_1.pose.position.x = room_x_coord[0];
+    Room_1.pose.position.y = room_y_coord[0];
+    Room_1.pose.position.z = 7.0;
     Room_1.pose.orientation.x = 0.0;
     Room_1.pose.orientation.y = 0.0;
     Room_1.pose.orientation.z = 0.0;
@@ -65,9 +65,9 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     room_1_name_marker.id = markers.markers.size()+1;
     room_1_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 
-    room_1_name_marker.pose.position.x = -1.7;
-    room_1_name_marker.pose.position.y = -3.0;
-    room_1_name_marker.pose.position.z = 5.4;
+    room_1_name_marker.pose.position.x = room_x_coord[0];
+    room_1_name_marker.pose.position.y = room_y_coord[0];
+    room_1_name_marker.pose.position.z = 7.4;
     room_1_name_marker.pose.orientation.x = 0.0;
     room_1_name_marker.pose.orientation.y = 0.0;
     room_1_name_marker.pose.orientation.z = 0.0;
@@ -85,314 +85,370 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
 
 
 // // room 2
-//     visualization_msgs::Marker Room_2;
-//     Room_2.header.frame_id = "map";
-//     Room_2.header.stamp = stamp;
-//     Room_2.ns = "room_2";
-//     Room_2.id = markers.markers.size();
-//     Room_2.type = visualization_msgs::Marker::CUBE;
+    visualization_msgs::Marker Room_2;
+    Room_2.header.frame_id = "map";
+    Room_2.header.stamp = stamp;
+    Room_2.ns = "room_2";
+    Room_2.id = markers.markers.size();
+    Room_2.type = visualization_msgs::Marker::CUBE;
 
-//     Room_2.pose.position.x = -0.6;
-//     Room_2.pose.position.y = 0.4;
-//     Room_2.pose.position.z = 5.0;
-//     Room_2.pose.orientation.x = 0.0;
-//     Room_2.pose.orientation.y = 0.0;
-//     Room_2.pose.orientation.z = 0.0;
-//     Room_2.pose.orientation.w = 1.0;
-//     Room_2.scale.x = 0.1;
-//     Room_2.scale.y = 0.7;
-//     Room_2.scale.z = 0.2;
+    Room_2.pose.position.x = room_x_coord[1];
+    Room_2.pose.position.y = room_y_coord[1];
+    Room_2.pose.position.z = 7.0;
+    Room_2.pose.orientation.x = 0.0;
+    Room_2.pose.orientation.y = 0.0;
+    Room_2.pose.orientation.z = 0.0;
+    Room_2.pose.orientation.w = 1.0;
+    Room_2.scale.x = 0.4;//0.1;
+    Room_2.scale.y = 0.4;//0.7;
+    Room_2.scale.z = 0.4;//0.2;
 
-//     Room_2.color.r = 0.0f;
-//     Room_2.color.g = 1.0f;
-//     Room_2.color.b = 0.0f;
-//     Room_2.color.a = 1.0;
-//     markers.markers.push_back(Room_2);
+    Room_2.color.r = 1.0f;
+    Room_2.color.g = 0.0f;
+    Room_2.color.b = 0.0f;
+    Room_2.color.a = 1.0;
+    markers.markers.push_back(Room_2);
 
-//     // room 2 name marker
-//     visualization_msgs::Marker room_2_name_marker;
-//     room_2_name_marker.header.frame_id = "map";
-//     room_2_name_marker.header.stamp = stamp;
-//     room_2_name_marker.ns = "room_2_name";
-//     room_2_name_marker.id = markers.markers.size()+1;
-//     room_2_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    // room 2 name marker
+    visualization_msgs::Marker room_2_name_marker;
+    room_2_name_marker.header.frame_id = "map";
+    room_2_name_marker.header.stamp = stamp;
+    room_2_name_marker.ns = "room_2_name";
+    room_2_name_marker.id = markers.markers.size()+1;
+    room_2_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 
-//     room_2_name_marker.pose.position.x = -0.8;
-//     room_2_name_marker.pose.position.y = 0.4;
-//     room_2_name_marker.pose.position.z = 5.4;
-//     room_2_name_marker.pose.orientation.x = 0.0;
-//     room_2_name_marker.pose.orientation.y = 0.0;
-//     room_2_name_marker.pose.orientation.z = 0.0;
-//     room_2_name_marker.pose.orientation.w = 1.0;
-//     room_2_name_marker.text = "Corridor";
-//     room_2_name_marker.scale.x = 0.4;
-//     room_2_name_marker.scale.y = 0.4;
-//     room_2_name_marker.scale.z = 0.4;
+    room_2_name_marker.pose.position.x = room_x_coord[1];
+    room_2_name_marker.pose.position.y = room_y_coord[1];
+    room_2_name_marker.pose.position.z = 7.4;
+    room_2_name_marker.pose.orientation.x = 0.0;
+    room_2_name_marker.pose.orientation.y = 0.0;
+    room_2_name_marker.pose.orientation.z = 0.0;
+    room_2_name_marker.pose.orientation.w = 1.0;
+    room_2_name_marker.text = "Room 299";
+    room_2_name_marker.scale.x = 0.4;
+    room_2_name_marker.scale.y = 0.4;
+    room_2_name_marker.scale.z = 0.4;
 
-//     room_2_name_marker.color.r = 1.0f;
-//     room_2_name_marker.color.g = 1.0f;
-//     room_2_name_marker.color.b = 1.0f;
-//     room_2_name_marker.color.a = 1.0;
-//     markers.markers.push_back(room_2_name_marker);
+    room_2_name_marker.color.r = 1.0f;
+    room_2_name_marker.color.g = 1.0f;
+    room_2_name_marker.color.b = 1.0f;
+    room_2_name_marker.color.a = 1.0;
+    markers.markers.push_back(room_2_name_marker);
 
 
 
 //       // room 3
-//     visualization_msgs::Marker Room_3;
-//     Room_3.header.frame_id = "map";
-//     Room_3.header.stamp = stamp;
-//     Room_3.ns = "room_3";
-//     Room_3.id = markers.markers.size();
-//     Room_3.type = visualization_msgs::Marker::CUBE;
+    visualization_msgs::Marker Room_3;
+    Room_3.header.frame_id = "map";
+    Room_3.header.stamp = stamp;
+    Room_3.ns = "room_3";
+    Room_3.id = markers.markers.size();
+    Room_3.type = visualization_msgs::Marker::CUBE;
 
-//     Room_3.pose.position.x = 1.7;
-//     Room_3.pose.position.y = -3.0;
-//     Room_3.pose.position.z = 5.0;
-//     Room_3.pose.orientation.x = 0.0;
-//     Room_3.pose.orientation.y = 0.0;
-//     Room_3.pose.orientation.z = 0.0;
-//     Room_3.pose.orientation.w = 1.0;
-//     Room_3.scale.x = 0.4;
-//     Room_3.scale.y = 0.4;
-//     Room_3.scale.z = 0.4;
+    Room_3.pose.position.x = room_x_coord[2];
+    Room_3.pose.position.y = room_y_coord[2];
+    Room_3.pose.position.z = 7.0;
+    Room_3.pose.orientation.x = 0.0;
+    Room_3.pose.orientation.y = 0.0;
+    Room_3.pose.orientation.z = 0.0;
+    Room_3.pose.orientation.w = 1.0;
+    Room_3.scale.x = 0.4;
+    Room_3.scale.y = 0.4;
+    Room_3.scale.z = 0.4;
 
-//     Room_3.color.r = 1.0f;
-//     Room_3.color.g = 0.0f;
-//     Room_3.color.b = 0.0f;
-//     Room_3.color.a = 1.0;
-//     markers.markers.push_back(Room_3);
+    Room_3.color.r = 1.0f;
+    Room_3.color.g = 0.0f;
+    Room_3.color.b = 0.0f;
+    Room_3.color.a = 1.0;
+    markers.markers.push_back(Room_3);
 
-//     // room 3 name marker
-//     visualization_msgs::Marker room_3_name_marker;
-//     room_3_name_marker.header.frame_id = "map";
-//     room_3_name_marker.header.stamp = stamp;
-//     room_3_name_marker.ns = "room_3_name";
-//     room_3_name_marker.id = markers.markers.size()+1;
-//     room_3_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    // room 3 name marker
+    visualization_msgs::Marker room_3_name_marker;
+    room_3_name_marker.header.frame_id = "map";
+    room_3_name_marker.header.stamp = stamp;
+    room_3_name_marker.ns = "room_3_name";
+    room_3_name_marker.id = markers.markers.size()+1;
+    room_3_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 
-//     room_3_name_marker.pose.position.x = 1.7;
-//     room_3_name_marker.pose.position.y = -3.0;
-//     room_3_name_marker.pose.position.z = 5.4;
-//     room_3_name_marker.pose.orientation.x = 0.0;
-//     room_3_name_marker.pose.orientation.y = 0.0;
-//     room_3_name_marker.pose.orientation.z = 0.0;
-//     room_3_name_marker.pose.orientation.w = 1.0;
-//     room_3_name_marker.text = "Room 290";
-//     room_3_name_marker.scale.x = 0.4;
-//     room_3_name_marker.scale.y = 0.4;
-//     room_3_name_marker.scale.z = 0.4;
+    room_3_name_marker.pose.position.x = room_x_coord[2];
+    room_3_name_marker.pose.position.y = room_y_coord[2];
+    room_3_name_marker.pose.position.z = 7.4;
+    room_3_name_marker.pose.orientation.x = 0.0;
+    room_3_name_marker.pose.orientation.y = 0.0;
+    room_3_name_marker.pose.orientation.z = 0.0;
+    room_3_name_marker.pose.orientation.w = 1.0;
+    room_3_name_marker.text = "Room 302";
+    room_3_name_marker.scale.x = 0.4;
+    room_3_name_marker.scale.y = 0.4;
+    room_3_name_marker.scale.z = 0.4;
 
-//     room_3_name_marker.color.r = 1.0f;
-//     room_3_name_marker.color.g = 1.0f;
-//     room_3_name_marker.color.b = 1.0f;
-//     room_3_name_marker.color.a = 1.0;
-//     markers.markers.push_back(room_3_name_marker);
+    room_3_name_marker.color.r = 1.0f;
+    room_3_name_marker.color.g = 1.0f;
+    room_3_name_marker.color.b = 1.0f;
+    room_3_name_marker.color.a = 1.0;
+    markers.markers.push_back(room_3_name_marker);
 
 
 //     // room 4
-//     visualization_msgs::Marker Room_4;
-//     Room_4.header.frame_id = "map";
-//     Room_4.header.stamp = stamp;
-//     Room_4.ns = "room_4";
-//     Room_4.id = markers.markers.size();
-//     Room_4.type = visualization_msgs::Marker::CUBE;
+    visualization_msgs::Marker Room_4;
+    Room_4.header.frame_id = "map";
+    Room_4.header.stamp = stamp;
+    Room_4.ns = "room_4";
+    Room_4.id = markers.markers.size();
+    Room_4.type = visualization_msgs::Marker::CUBE;
 
-//     Room_4.pose.position.x = 1.4;
-//     Room_4.pose.position.y = 2.5;
-//     Room_4.pose.position.z = 5.0;
-//     Room_4.pose.orientation.x = 0.0;
-//     Room_4.pose.orientation.y = 0.0;
-//     Room_4.pose.orientation.z = 0.0;
-//     Room_4.pose.orientation.w = 1.0;
-//     Room_4.scale.x = 0.4;
-//     Room_4.scale.y = 0.4;
-//     Room_4.scale.z = 0.4;
+    Room_4.pose.position.x = room_x_coord[3];
+    Room_4.pose.position.y = room_y_coord[3];
+    Room_4.pose.position.z = 7.0;
+    Room_4.pose.orientation.x = 0.0;
+    Room_4.pose.orientation.y = 0.0;
+    Room_4.pose.orientation.z = 0.0;
+    Room_4.pose.orientation.w = 1.0;
+    Room_4.scale.x = 0.4;
+    Room_4.scale.y = 0.4;
+    Room_4.scale.z = 0.4;
 
-//     Room_4.color.r = 1.0f;
-//     Room_4.color.g = 0.0f;
-//     Room_4.color.b = 0.0f;
-//     Room_4.color.a = 1.0;
-//     markers.markers.push_back(Room_4);
+    Room_4.color.r = 1.0f;
+    Room_4.color.g = 0.0f;
+    Room_4.color.b = 0.0f;
+    Room_4.color.a = 1.0;
+    markers.markers.push_back(Room_4);
 
-//     // room 1 name marker
-//     visualization_msgs::Marker room_4_name_marker;
-//     room_4_name_marker.header.frame_id = "map";
-//     room_4_name_marker.header.stamp = stamp;
-//     room_4_name_marker.ns = "room_4_name";
-//     room_4_name_marker.id = markers.markers.size()+1;
-//     room_4_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    // room 1 name marker
+    visualization_msgs::Marker room_4_name_marker;
+    room_4_name_marker.header.frame_id = "map";
+    room_4_name_marker.header.stamp = stamp;
+    room_4_name_marker.ns = "room_4_name";
+    room_4_name_marker.id = markers.markers.size()+1;
+    room_4_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 
-//     room_4_name_marker.pose.position.x = 1.4;
-//     room_4_name_marker.pose.position.y = 2.5;
-//     room_4_name_marker.pose.position.z = 5.4;
-//     room_4_name_marker.pose.orientation.x = 0.0;
-//     room_4_name_marker.pose.orientation.y = 0.0;
-//     room_4_name_marker.pose.orientation.z = 0.0;
-//     room_4_name_marker.pose.orientation.w = 1.0;
-//     room_4_name_marker.text = "Room 302";
-//     room_4_name_marker.scale.x = 0.4;
-//     room_4_name_marker.scale.y = 0.4;
-//     room_4_name_marker.scale.z = 0.4;
+    room_4_name_marker.pose.position.x = room_x_coord[3];
+    room_4_name_marker.pose.position.y = room_y_coord[3];
+    room_4_name_marker.pose.position.z = 7.4;
+    room_4_name_marker.pose.orientation.x = 0.0;
+    room_4_name_marker.pose.orientation.y = 0.0;
+    room_4_name_marker.pose.orientation.z = 0.0;
+    room_4_name_marker.pose.orientation.w = 1.0;
+    room_4_name_marker.text = "Room 322";
+    room_4_name_marker.scale.x = 0.4;
+    room_4_name_marker.scale.y = 0.4;
+    room_4_name_marker.scale.z = 0.4;
 
-//     room_4_name_marker.color.r = 1.0f;
-//     room_4_name_marker.color.g = 1.0f;
-//     room_4_name_marker.color.b = 1.0f;
-//     room_4_name_marker.color.a = 1.0;
-//     markers.markers.push_back(room_4_name_marker);
+    room_4_name_marker.color.r = 1.0f;
+    room_4_name_marker.color.g = 1.0f;
+    room_4_name_marker.color.b = 1.0f;
+    room_4_name_marker.color.a = 1.0;
+    markers.markers.push_back(room_4_name_marker);
 
 
 //     // room 5
-//     visualization_msgs::Marker Room_5;
-//     Room_5.header.frame_id = "map";
-//     Room_5.header.stamp = stamp;
-//     Room_5.ns = "room_5";
-//     Room_5.id = markers.markers.size();
-//     Room_5.type = visualization_msgs::Marker::CUBE;
+    visualization_msgs::Marker Room_5;
+    Room_5.header.frame_id = "map";
+    Room_5.header.stamp = stamp;
+    Room_5.ns = "room_5";
+    Room_5.id = markers.markers.size();
+    Room_5.type = visualization_msgs::Marker::CUBE;
 
-//     Room_5.pose.position.x = 1.4;
-//     Room_5.pose.position.y = 5.5;
-//     Room_5.pose.position.z = 5.0;
-//     Room_5.pose.orientation.x = 0.0;
-//     Room_5.pose.orientation.y = 0.0;
-//     Room_5.pose.orientation.z = 0.0;
-//     Room_5.pose.orientation.w = 1.0;
-//     Room_5.scale.x = 0.4;
-//     Room_5.scale.y = 0.4;
-//     Room_5.scale.z = 0.4;
+    Room_5.pose.position.x = room_x_coord[4];
+    Room_5.pose.position.y = room_y_coord[4];
+    Room_5.pose.position.z = 7.0;
+    Room_5.pose.orientation.x = 0.0;
+    Room_5.pose.orientation.y = 0.0;
+    Room_5.pose.orientation.z = 0.0;
+    Room_5.pose.orientation.w = 1.0;
+    Room_5.scale.x = 0.4;
+    Room_5.scale.y = 0.4;
+    Room_5.scale.z = 0.4;
 
-//     Room_5.color.r = 1.0f;
-//     Room_5.color.g = 0.0f;
-//     Room_5.color.b = 0.0f;
-//     Room_5.color.a = 1.0;
-//     markers.markers.push_back(Room_5);
+    Room_5.color.r = 1.0f;
+    Room_5.color.g = 0.0f;
+    Room_5.color.b = 0.0f;
+    Room_5.color.a = 1.0;
+    markers.markers.push_back(Room_5);
 
-//     // room 5 name marker
-//     visualization_msgs::Marker room_5_name_marker;
-//     room_5_name_marker.header.frame_id = "map";
-//     room_5_name_marker.header.stamp = stamp;
-//     room_5_name_marker.ns = "room_5_name";
-//     room_5_name_marker.id = markers.markers.size()+1;
-//     room_5_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    // room 5 name marker
+    visualization_msgs::Marker room_5_name_marker;
+    room_5_name_marker.header.frame_id = "map";
+    room_5_name_marker.header.stamp = stamp;
+    room_5_name_marker.ns = "room_5_name";
+    room_5_name_marker.id = markers.markers.size()+1;
+    room_5_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 
-//     room_5_name_marker.pose.position.x = 1.4;
-//     room_5_name_marker.pose.position.y = 5.5;
-//     room_5_name_marker.pose.position.z = 5.4;
-//     room_5_name_marker.pose.orientation.x = 0.0;
-//     room_5_name_marker.pose.orientation.y = 0.0;
-//     room_5_name_marker.pose.orientation.z = 0.0;
-//     room_5_name_marker.pose.orientation.w = 1.0;
-//     room_5_name_marker.text = "Room 327";
-//     room_5_name_marker.scale.x = 0.4;
-//     room_5_name_marker.scale.y = 0.4;
-//     room_5_name_marker.scale.z = 0.4;
+    room_5_name_marker.pose.position.x = room_x_coord[4];
+    room_5_name_marker.pose.position.y = room_y_coord[4];
+    room_5_name_marker.pose.position.z = 7.4;
+    room_5_name_marker.pose.orientation.x = 0.0;
+    room_5_name_marker.pose.orientation.y = 0.0;
+    room_5_name_marker.pose.orientation.z = 0.0;
+    room_5_name_marker.pose.orientation.w = 1.0;
+    room_5_name_marker.text = "Room 324";
+    room_5_name_marker.scale.x = 0.4;
+    room_5_name_marker.scale.y = 0.4;
+    room_5_name_marker.scale.z = 0.4;
 
-//     room_5_name_marker.color.r = 1.0f;
-//     room_5_name_marker.color.g = 1.0f;
-//     room_5_name_marker.color.b = 1.0f;
-//     room_5_name_marker.color.a = 1.0;
-//     markers.markers.push_back(room_5_name_marker);
+    room_5_name_marker.color.r = 1.0f;
+    room_5_name_marker.color.g = 1.0f;
+    room_5_name_marker.color.b = 1.0f;
+    room_5_name_marker.color.a = 1.0;
+    markers.markers.push_back(room_5_name_marker);
 
 
 //         // room 6
-//     visualization_msgs::Marker Room_6;
-//     Room_6.header.frame_id = "map";
-//     Room_6.header.stamp = stamp;
-//     Room_6.ns = "room_6";
-//     Room_6.id = markers.markers.size();
-//     Room_6.type = visualization_msgs::Marker::CUBE;
+    visualization_msgs::Marker Room_6;
+    Room_6.header.frame_id = "map";
+    Room_6.header.stamp = stamp;
+    Room_6.ns = "room_6";
+    Room_6.id = markers.markers.size();
+    Room_6.type = visualization_msgs::Marker::CUBE;
 
-//     Room_6.pose.position.x = 1.4;
-//     Room_6.pose.position.y = .5;
-//     Room_6.pose.position.z = 5.0;
-//     Room_6.pose.orientation.x = 0.0;
-//     Room_6.pose.orientation.y = 0.0;
-//     Room_6.pose.orientation.z = 0.0;
-//     Room_6.pose.orientation.w = 1.0;
-//     Room_6.scale.x = 0.4;
-//     Room_6.scale.y = 0.4;
-//     Room_6.scale.z = 0.4;
+    Room_6.pose.position.x = room_x_coord[5];
+    Room_6.pose.position.y = room_y_coord[5];
+    Room_6.pose.position.z = 7.0;
+    Room_6.pose.orientation.x = 0.0;
+    Room_6.pose.orientation.y = 0.0;
+    Room_6.pose.orientation.z = 0.0;
+    Room_6.pose.orientation.w = 1.0;
+    Room_6.scale.x = 0.4;
+    Room_6.scale.y = 0.4;
+    Room_6.scale.z = 0.4;
 
-//     Room_6.color.r = 1.0f;
-//     Room_6.color.g = 0.0f;
-//     Room_6.color.b = 0.0f;
-//     Room_6.color.a = 1.0;
-//     markers.markers.push_back(Room_6);
+    Room_6.color.r = 1.0f;
+    Room_6.color.g = 0.0f;
+    Room_6.color.b = 0.0f;
+    Room_6.color.a = 1.0;
+    markers.markers.push_back(Room_6);
 
-//     // room 6 name marker
-//     visualization_msgs::Marker room_6_name_marker;
-//     room_6_name_marker.header.frame_id = "map";
-//     room_6_name_marker.header.stamp = stamp;
-//     room_6_name_marker.ns = "room_6_name";
-//     room_6_name_marker.id = markers.markers.size()+1;
-//     room_6_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    // room 6 name marker
+    visualization_msgs::Marker room_6_name_marker;
+    room_6_name_marker.header.frame_id = "map";
+    room_6_name_marker.header.stamp = stamp;
+    room_6_name_marker.ns = "room_6_name";
+    room_6_name_marker.id = markers.markers.size()+1;
+    room_6_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 
-//     room_6_name_marker.pose.position.x = 1.4;
-//     room_6_name_marker.pose.position.y = 7.5;
-//     room_6_name_marker.pose.position.z = 5.4;
-//     room_6_name_marker.pose.orientation.x = 0.0;
-//     room_6_name_marker.pose.orientation.y = 0.0;
-//     room_6_name_marker.pose.orientation.z = 0.0;
-//     room_6_name_marker.pose.orientation.w = 1.0;
-//     room_6_name_marker.text = "Room 310";
-//     room_6_name_marker.scale.x = 0.4;
-//     room_6_name_marker.scale.y = 0.4;
-//     room_6_name_marker.scale.z = 0.4;
-//     room_6_name_marker.color.r = 1.0f;
-//     room_6_name_marker.color.g = 1.0f;
-//     room_6_name_marker.color.b = 1.0f;
-//     room_6_name_marker.color.a = 1.0;
-//     markers.markers.push_back(room_6_name_marker);
+    room_6_name_marker.pose.position.x = room_x_coord[5];
+    room_6_name_marker.pose.position.y = room_y_coord[5];
+    room_6_name_marker.pose.position.z = 7.4;
+    room_6_name_marker.pose.orientation.x = 0.0;
+    room_6_name_marker.pose.orientation.y = 0.0;
+    room_6_name_marker.pose.orientation.z = 0.0;
+    room_6_name_marker.pose.orientation.w = 1.0;
+    room_6_name_marker.text = "Room 325";
+    room_6_name_marker.scale.x = 0.4;
+    room_6_name_marker.scale.y = 0.4;
+    room_6_name_marker.scale.z = 0.4;
+    room_6_name_marker.color.r = 1.0f;
+    room_6_name_marker.color.g = 1.0f;
+    room_6_name_marker.color.b = 1.0f;
+    room_6_name_marker.color.a = 1.0;
+    markers.markers.push_back(room_6_name_marker);
 
     
 //             // room 7
-//     visualization_msgs::Marker Room_7;
-//     Room_7.header.frame_id = "map";
-//     Room_7.header.stamp = stamp;
-//     Room_7.ns = "room_7";
-//     Room_7.id = markers.markers.size();
-//     Room_7.type = visualization_msgs::Marker::CUBE;
+    visualization_msgs::Marker Room_7;
+    Room_7.header.frame_id = "map";
+    Room_7.header.stamp = stamp;
+    Room_7.ns = "room_7";
+    Room_7.id = markers.markers.size();
+    Room_7.type = visualization_msgs::Marker::CUBE;
 
-//     Room_7.pose.position.x = -1.4;
-//     Room_7.pose.position.y = 5.5;
-//     Room_7.pose.position.z = 5.0;
-//     Room_7.pose.orientation.x = 0.0;
-//     Room_7.pose.orientation.y = 0.0;
-//     Room_7.pose.orientation.z = 0.0;
-//     Room_7.pose.orientation.w = 1.0;
-//     Room_7.scale.x = 0.4;
-//     Room_7.scale.y = 0.4;
-//     Room_7.scale.z = 0.4;
+    Room_7.pose.position.x = room_x_coord[6];
+    Room_7.pose.position.y = room_y_coord[6];
+    Room_7.pose.position.z = 7.0;
+    Room_7.pose.orientation.x = 0.0;
+    Room_7.pose.orientation.y = 0.0;
+    Room_7.pose.orientation.z = 0.0;
+    Room_7.pose.orientation.w = 1.0;
+    Room_7.scale.x = 0.4;
+    Room_7.scale.y = 0.4;
+    Room_7.scale.z = 0.4;
 
-//     Room_7.color.r = 1.0f;
-//     Room_7.color.g = 0.0f;
-//     Room_7.color.b = 0.0f;
-//     Room_7.color.a = 1.0;
-//     markers.markers.push_back(Room_7);
+    Room_7.color.r = 1.0f;
+    Room_7.color.g = 0.0f;
+    Room_7.color.b = 0.0f;
+    Room_7.color.a = 1.0;
+    markers.markers.push_back(Room_7);
 
-//     // room 7 name marker
-//     visualization_msgs::Marker room_7_name_marker;
-//     room_7_name_marker.header.frame_id = "map";
-//     room_7_name_marker.header.stamp = stamp;
-//     room_7_name_marker.ns = "room_7_name";
-//     room_7_name_marker.id = markers.markers.size()+1;
-//     room_7_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    // room 7 name marker
+    visualization_msgs::Marker room_7_name_marker;
+    room_7_name_marker.header.frame_id = "map";
+    room_7_name_marker.header.stamp = stamp;
+    room_7_name_marker.ns = "room_7_name";
+    room_7_name_marker.id = markers.markers.size()+1;
+    room_7_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
 
-//     room_7_name_marker.pose.position.x = -1.4;
-//     room_7_name_marker.pose.position.y = 5.5;
-//     room_7_name_marker.pose.position.z = 5.4;
-//     room_7_name_marker.pose.orientation.x = 0.0;
-//     room_7_name_marker.pose.orientation.y = 0.0;
-//     room_7_name_marker.pose.orientation.z = 0.0;
-//     room_7_name_marker.pose.orientation.w = 1.0;
-//     room_7_name_marker.text = "Room 310";
-//     room_7_name_marker.scale.x = 0.4;
-//     room_7_name_marker.scale.y = 0.4;
-//     room_7_name_marker.scale.z = 0.4;
-//     room_7_name_marker.color.r = 1.0f;
-//     room_7_name_marker.color.g = 1.0f;
-//     room_7_name_marker.color.b = 1.0f;
-//     room_7_name_marker.color.a = 1.0;
-//     markers.markers.push_back(room_7_name_marker);
+    room_7_name_marker.pose.position.x = room_x_coord[6];
+    room_7_name_marker.pose.position.y = room_y_coord[6];
+    room_7_name_marker.pose.position.z = 7.4;
+    room_7_name_marker.pose.orientation.x = 0.0;
+    room_7_name_marker.pose.orientation.y = 0.0;
+    room_7_name_marker.pose.orientation.z = 0.0;
+    room_7_name_marker.pose.orientation.w = 1.0;
+    room_7_name_marker.text = "Room 326";
+    room_7_name_marker.scale.x = 0.4;
+    room_7_name_marker.scale.y = 0.4;
+    room_7_name_marker.scale.z = 0.4;
+    room_7_name_marker.color.r = 1.0f;
+    room_7_name_marker.color.g = 1.0f;
+    room_7_name_marker.color.b = 1.0f;
+    room_7_name_marker.color.a = 1.0;
+    markers.markers.push_back(room_7_name_marker);
+
+    //             // room 8
+    visualization_msgs::Marker Room_8;
+    Room_8.header.frame_id = "map";
+    Room_8.header.stamp = stamp;
+    Room_8.ns = "room_8";
+    Room_8.id = markers.markers.size();
+    Room_8.type = visualization_msgs::Marker::CUBE;
+
+    Room_8.pose.position.x = room_x_coord[7];
+    Room_8.pose.position.y = room_y_coord[7];
+    Room_8.pose.position.z = 7.0;
+    Room_8.pose.orientation.x = 0.0;
+    Room_8.pose.orientation.y = 0.0;
+    Room_8.pose.orientation.z = 0.0;
+    Room_8.pose.orientation.w = 1.0;
+    Room_8.scale.x = 0.4;
+    Room_8.scale.y = 0.4;
+    Room_8.scale.z = 0.4;
+
+    Room_8.color.r = 1.0f;
+    Room_8.color.g = 0.0f;
+    Room_8.color.b = 0.0f;
+    Room_8.color.a = 1.0;
+    markers.markers.push_back(Room_8);
+
+    // room 8 name marker
+    visualization_msgs::Marker room_8_name_marker;
+    room_8_name_marker.header.frame_id = "map";
+    room_8_name_marker.header.stamp = stamp;
+    room_8_name_marker.ns = "room_8_name";
+    room_8_name_marker.id = markers.markers.size()+1;
+    room_8_name_marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+
+    room_8_name_marker.pose.position.x = room_x_coord[7];
+    room_8_name_marker.pose.position.y = room_y_coord[7];
+    room_8_name_marker.pose.position.z = 7.4;
+    room_8_name_marker.pose.orientation.x = 0.0;
+    room_8_name_marker.pose.orientation.y = 0.0;
+    room_8_name_marker.pose.orientation.z = 0.0;
+    room_8_name_marker.pose.orientation.w = 1.0;
+    room_8_name_marker.text = "Room 327";
+    room_8_name_marker.scale.x = 0.4;
+    room_8_name_marker.scale.y = 0.4;
+    room_8_name_marker.scale.z = 0.4;
+    room_8_name_marker.color.r = 1.0f;
+    room_8_name_marker.color.g = 1.0f;
+    room_8_name_marker.color.b = 1.0f;
+    room_8_name_marker.color.a = 1.0;
+    markers.markers.push_back(room_8_name_marker);
+
+
+
+
+
+
 
     visualization_msgs::Marker wall_1;
     wall_1.header.frame_id = "map";
@@ -401,8 +457,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_1.id = markers.markers.size();
     wall_1.type = visualization_msgs::Marker::SPHERE;
 
-    wall_1.pose.position.x = x_coord[3];
-    wall_1.pose.position.y = y_coord[3];
+    wall_1.pose.position.x = walls_x_coord[3];
+    wall_1.pose.position.y = wall_y_coord[3];
     wall_1.pose.position.z = 5.0;
     wall_1.pose.orientation.x = 0.0;
     wall_1.pose.orientation.y = 0.0;
@@ -425,8 +481,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_2.id = markers.markers.size();
     wall_2.type = visualization_msgs::Marker::SPHERE;
 
-    wall_2.pose.position.x = x_coord[4];
-    wall_2.pose.position.y = y_coord[4];
+    wall_2.pose.position.x = walls_x_coord[4];
+    wall_2.pose.position.y = wall_y_coord[4];
     wall_2.pose.position.z = 5.0;
     wall_2.pose.orientation.x = 0.0;
     wall_2.pose.orientation.y = 0.0;
@@ -449,8 +505,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_3.id = markers.markers.size();
     wall_3.type = visualization_msgs::Marker::SPHERE;
 
-    wall_3.pose.position.x = x_coord[5];
-    wall_3.pose.position.y = y_coord[5];
+    wall_3.pose.position.x = walls_x_coord[5];
+    wall_3.pose.position.y = wall_y_coord[5];
     wall_3.pose.position.z = 5.0;
     wall_3.pose.orientation.x = 0.0;
     wall_3.pose.orientation.y = 0.0;
@@ -473,8 +529,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_4.id = markers.markers.size();
     wall_4.type = visualization_msgs::Marker::SPHERE;
 
-    wall_4.pose.position.x = x_coord[6];
-    wall_4.pose.position.y = y_coord[6];
+    wall_4.pose.position.x = walls_x_coord[6];
+    wall_4.pose.position.y = wall_y_coord[6];
     wall_4.pose.position.z = 5.0;
     wall_4.pose.orientation.x = 0.0;
     wall_4.pose.orientation.y = 0.0;
@@ -497,8 +553,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_5.id = markers.markers.size();
     wall_5.type = visualization_msgs::Marker::SPHERE;
 
-    wall_5.pose.position.x = x_coord[7];
-    wall_5.pose.position.y = y_coord[7];
+    wall_5.pose.position.x = walls_x_coord[7];
+    wall_5.pose.position.y = wall_y_coord[7];
     wall_5.pose.position.z = 5.0;
     wall_5.pose.orientation.x = 0.0;
     wall_5.pose.orientation.y = 0.0;
@@ -521,8 +577,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_6.id = markers.markers.size();
     wall_6.type = visualization_msgs::Marker::SPHERE;
 
-    wall_6.pose.position.x = x_coord[8];
-    wall_6.pose.position.y = y_coord[8];
+    wall_6.pose.position.x = walls_x_coord[8];
+    wall_6.pose.position.y = wall_y_coord[8];
     wall_6.pose.position.z = 5.0;
     wall_6.pose.orientation.x = 0.0;
     wall_6.pose.orientation.y = 0.0;
@@ -546,8 +602,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_7.id = markers.markers.size();
     wall_7.type = visualization_msgs::Marker::SPHERE;
 
-    wall_7.pose.position.x = x_coord[9];
-    wall_7.pose.position.y = y_coord[9];
+    wall_7.pose.position.x = walls_x_coord[9];
+    wall_7.pose.position.y = wall_y_coord[9];
     wall_7.pose.position.z = 5.0;
     wall_7.pose.orientation.x = 0.0;
     wall_7.pose.orientation.y = 0.0;
@@ -570,8 +626,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_8.id = markers.markers.size();
     wall_8.type = visualization_msgs::Marker::SPHERE;
 
-    wall_8.pose.position.x = x_coord[10];
-    wall_8.pose.position.y = y_coord[10];
+    wall_8.pose.position.x = walls_x_coord[10];
+    wall_8.pose.position.y = wall_y_coord[10];
     wall_8.pose.position.z = 5.0;
     wall_8.pose.orientation.x = 0.0;
     wall_8.pose.orientation.y = 0.0;
@@ -594,8 +650,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_9.id = markers.markers.size();
     wall_9.type = visualization_msgs::Marker::SPHERE;
 
-    wall_9.pose.position.x = x_coord[11];
-    wall_9.pose.position.y = y_coord[11]-0.2;  // merges with another wall
+    wall_9.pose.position.x = walls_x_coord[11];
+    wall_9.pose.position.y = wall_y_coord[11]-0.2;  // merges with another wall
     wall_9.pose.position.z = 5.0;
     wall_9.pose.orientation.x = 0.0;
     wall_9.pose.orientation.y = 0.0;
@@ -618,8 +674,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_10.id = markers.markers.size();
     wall_10.type = visualization_msgs::Marker::SPHERE;
 
-    wall_10.pose.position.x = x_coord[12];
-    wall_10.pose.position.y = y_coord[12];
+    wall_10.pose.position.x = walls_x_coord[12];
+    wall_10.pose.position.y = wall_y_coord[12];
     wall_10.pose.position.z = 5.0;
     wall_10.pose.orientation.x = 0.0;
     wall_10.pose.orientation.y = 0.0;
@@ -642,8 +698,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_11.id = markers.markers.size();
     wall_11.type = visualization_msgs::Marker::SPHERE;
 
-    wall_11.pose.position.x = x_coord[13];
-    wall_11.pose.position.y = y_coord[13];
+    wall_11.pose.position.x = walls_x_coord[13];
+    wall_11.pose.position.y = wall_y_coord[13];
     wall_11.pose.position.z = 5.0;
     wall_11.pose.orientation.x = 0.0;
     wall_11.pose.orientation.y = 0.0;
@@ -666,8 +722,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_12.id = markers.markers.size();
     wall_12.type = visualization_msgs::Marker::SPHERE;
 
-    wall_12.pose.position.x = x_coord[14];
-    wall_12.pose.position.y = y_coord[14];
+    wall_12.pose.position.x = walls_x_coord[14];
+    wall_12.pose.position.y = wall_y_coord[14];
     wall_12.pose.position.z = 5.0;
     wall_12.pose.orientation.x = 0.0;
     wall_12.pose.orientation.y = 0.0;
@@ -690,8 +746,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_13.id = markers.markers.size();
     wall_13.type = visualization_msgs::Marker::SPHERE;
 
-    wall_13.pose.position.x = x_coord[15];
-    wall_13.pose.position.y = y_coord[15];
+    wall_13.pose.position.x = walls_x_coord[15];
+    wall_13.pose.position.y = wall_y_coord[15];
     wall_13.pose.position.z = 5.0;
     wall_13.pose.orientation.x = 0.0;
     wall_13.pose.orientation.y = 0.0;
@@ -715,8 +771,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_14.id = markers.markers.size();
     wall_14.type = visualization_msgs::Marker::SPHERE;
 
-    wall_14.pose.position.x = x_coord[16];
-    wall_14.pose.position.y = y_coord[16];
+    wall_14.pose.position.x = walls_x_coord[16];
+    wall_14.pose.position.y = wall_y_coord[16];
     wall_14.pose.position.z = 5.0;
     wall_14.pose.orientation.x = 0.0;
     wall_14.pose.orientation.y = 0.0;
@@ -739,8 +795,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_15.id = markers.markers.size();
     wall_15.type = visualization_msgs::Marker::SPHERE;
 
-    wall_15.pose.position.x = x_coord[17];
-    wall_15.pose.position.y = y_coord[17];
+    wall_15.pose.position.x = walls_x_coord[17];
+    wall_15.pose.position.y = wall_y_coord[17];
     wall_15.pose.position.z = 5.0;
     wall_15.pose.orientation.x = 0.0;
     wall_15.pose.orientation.y = 0.0;
@@ -763,8 +819,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_16.id = markers.markers.size();
     wall_16.type = visualization_msgs::Marker::SPHERE;
 
-    wall_16.pose.position.x = x_coord[18];
-    wall_16.pose.position.y = y_coord[18];
+    wall_16.pose.position.x = walls_x_coord[18];
+    wall_16.pose.position.y = wall_y_coord[18];
     wall_16.pose.position.z = 5.0;
     wall_16.pose.orientation.x = 0.0;
     wall_16.pose.orientation.y = 0.0;
@@ -787,8 +843,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_17.id = markers.markers.size();
     wall_17.type = visualization_msgs::Marker::SPHERE;
 
-    wall_17.pose.position.x = x_coord[19];
-    wall_17.pose.position.y = y_coord[19];
+    wall_17.pose.position.x = walls_x_coord[19];
+    wall_17.pose.position.y = wall_y_coord[19];
     wall_17.pose.position.z = 5.0;
     wall_17.pose.orientation.x = 0.0;
     wall_17.pose.orientation.y = 0.0;
@@ -811,8 +867,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_18.id = markers.markers.size();
     wall_18.type = visualization_msgs::Marker::SPHERE;
 
-    wall_18.pose.position.x = x_coord[20];
-    wall_18.pose.position.y = y_coord[20];
+    wall_18.pose.position.x = walls_x_coord[20];
+    wall_18.pose.position.y = wall_y_coord[20];
     wall_18.pose.position.z = 5.0;
     wall_18.pose.orientation.x = 0.0;
     wall_18.pose.orientation.y = 0.0;
@@ -835,8 +891,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_19.id = markers.markers.size();
     wall_19.type = visualization_msgs::Marker::SPHERE;
 
-    wall_19.pose.position.x = x_coord[21];
-    wall_19.pose.position.y = y_coord[21];
+    wall_19.pose.position.x = walls_x_coord[21];
+    wall_19.pose.position.y = wall_y_coord[21];
     wall_19.pose.position.z = 5.0;
     wall_19.pose.orientation.x = 0.0;
     wall_19.pose.orientation.y = 0.0;
@@ -860,8 +916,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_20.id = markers.markers.size();
     wall_20.type = visualization_msgs::Marker::SPHERE;
 
-    wall_20.pose.position.x = x_coord[22];
-    wall_20.pose.position.y = y_coord[22];
+    wall_20.pose.position.x = walls_x_coord[22];
+    wall_20.pose.position.y = wall_y_coord[22];
     wall_20.pose.position.z = 5.0;
     wall_20.pose.orientation.x = 0.0;
     wall_20.pose.orientation.y = 0.0;
@@ -884,8 +940,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_21.id = markers.markers.size();
     wall_21.type = visualization_msgs::Marker::SPHERE;
 
-    wall_21.pose.position.x = x_coord[23];
-    wall_21.pose.position.y = y_coord[23];
+    wall_21.pose.position.x = walls_x_coord[23];
+    wall_21.pose.position.y = wall_y_coord[23];
     wall_21.pose.position.z = 5.0;
     wall_21.pose.orientation.x = 0.0;
     wall_21.pose.orientation.y = 0.0;
@@ -908,8 +964,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_22.id = markers.markers.size();
     wall_22.type = visualization_msgs::Marker::SPHERE;
 
-    wall_22.pose.position.x = x_coord[24];
-    wall_22.pose.position.y = y_coord[24]+0.2;
+    wall_22.pose.position.x = walls_x_coord[24];
+    wall_22.pose.position.y = wall_y_coord[24]+0.2;
     wall_22.pose.position.z = 5.0;
     wall_22.pose.orientation.x = 0.0;
     wall_22.pose.orientation.y = 0.0;
@@ -932,8 +988,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_23.id = markers.markers.size();
     wall_23.type = visualization_msgs::Marker::SPHERE;
 
-    wall_23.pose.position.x = x_coord[25];
-    wall_23.pose.position.y = y_coord[25];
+    wall_23.pose.position.x = walls_x_coord[25];
+    wall_23.pose.position.y = wall_y_coord[25];
     wall_23.pose.position.z = 5.0;
     wall_23.pose.orientation.x = 0.0;
     wall_23.pose.orientation.y = 0.0;
@@ -956,8 +1012,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_24.id = markers.markers.size();
     wall_24.type = visualization_msgs::Marker::SPHERE;
 
-    wall_24.pose.position.x = x_coord[26];
-    wall_24.pose.position.y = y_coord[26];
+    wall_24.pose.position.x = walls_x_coord[26];
+    wall_24.pose.position.y = wall_y_coord[26];
     wall_24.pose.position.z = 5.0;
     wall_24.pose.orientation.x = 0.0;
     wall_24.pose.orientation.y = 0.0;
@@ -980,8 +1036,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_25.id = markers.markers.size();
     wall_25.type = visualization_msgs::Marker::SPHERE;
 
-    wall_25.pose.position.x = x_coord[27];
-    wall_25.pose.position.y = y_coord[27];
+    wall_25.pose.position.x = walls_x_coord[27];
+    wall_25.pose.position.y = wall_y_coord[27];
     wall_25.pose.position.z = 5.0;
     wall_25.pose.orientation.x = 0.0;
     wall_25.pose.orientation.y = 0.0;
@@ -1004,8 +1060,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_26.id = markers.markers.size();
     wall_26.type = visualization_msgs::Marker::SPHERE;
 
-    wall_26.pose.position.x = x_coord[28];
-    wall_26.pose.position.y = y_coord[28];
+    wall_26.pose.position.x = walls_x_coord[28];
+    wall_26.pose.position.y = wall_y_coord[28];
     wall_26.pose.position.z = 5.0;
     wall_26.pose.orientation.x = 0.0;
     wall_26.pose.orientation.y = 0.0;
@@ -1028,8 +1084,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_27.id = markers.markers.size();
     wall_27.type = visualization_msgs::Marker::SPHERE;
 
-    wall_27.pose.position.x = x_coord[29];
-    wall_27.pose.position.y = y_coord[29];
+    wall_27.pose.position.x = walls_x_coord[29];
+    wall_27.pose.position.y = wall_y_coord[29];
     wall_27.pose.position.z = 5.0;
     wall_27.pose.orientation.x = 0.0;
     wall_27.pose.orientation.y = 0.0;
@@ -1052,8 +1108,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_28.id = markers.markers.size();
     wall_28.type = visualization_msgs::Marker::SPHERE;
 
-    wall_28.pose.position.x = x_coord[30];
-    wall_28.pose.position.y = y_coord[30]+0.2;
+    wall_28.pose.position.x = walls_x_coord[30];
+    wall_28.pose.position.y = wall_y_coord[30]+0.2;
     wall_28.pose.position.z = 5.0;
     wall_28.pose.orientation.x = 0.0;
     wall_28.pose.orientation.y = 0.0;
@@ -1076,8 +1132,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_29.id = markers.markers.size();
     wall_29.type = visualization_msgs::Marker::SPHERE;
 
-    wall_29.pose.position.x = x_coord[31];
-    wall_29.pose.position.y = y_coord[31];
+    wall_29.pose.position.x = walls_x_coord[31];
+    wall_29.pose.position.y = wall_y_coord[31];
     wall_29.pose.position.z = 5.0;
     wall_29.pose.orientation.x = 0.0;
     wall_29.pose.orientation.y = 0.0;
@@ -1100,8 +1156,8 @@ visualization_msgs::MarkerArray create_marker_array(const ros::Time& stamp, std:
     wall_30.id = markers.markers.size();
     wall_30.type = visualization_msgs::Marker::SPHERE;
 
-    wall_30.pose.position.x = x_coord[32];
-    wall_30.pose.position.y = y_coord[32];
+    wall_30.pose.position.x = walls_x_coord[32];
+    wall_30.pose.position.y = wall_y_coord[32];
     wall_30.pose.position.z = 5.0;
     wall_30.pose.orientation.x = 0.0;
     wall_30.pose.orientation.y = 0.0;
@@ -1203,19 +1259,25 @@ int main( int argc, char** argv )
     auto pClass2 = it->second;
     std::cout<<pClass1<<std::endl;
   }
-  auto x_col = column_values[1];
-  std::cout<<x_col.first<<std::endl;
-  std::vector<double> x_coord = x_col.second;
-  std::cout<<"x : "<<x_coord[11]<<std::endl;
-  auto y_col = column_values[2];
-  std::vector<double> y_coord = y_col.second;
-  std::cout<<"y : "<<y_coord[11]<<std::endl;
+  auto wall_x_col = column_values[1];
+  std::cout<<wall_x_col.first<<std::endl;
+  std::vector<double> walls_x_coord = wall_x_col.second;
+  auto wall_y_col = column_values[2];
+  std::vector<double> wall_y_coord = wall_y_col.second;
+
+  auto room_x_col = column_values[4];
+  std::cout<<room_x_col.first<<std::endl;
+  std::vector<double> room_x_coord = room_x_col.second;
+  auto room_y_col = column_values[5];
+  std::vector<double> room_y_coord = room_y_col.second;
+
+
 
   
   
 
 
-auto markers = create_marker_array(ros::Time::now(), x_coord, y_coord);
+auto markers = create_marker_array(ros::Time::now(), walls_x_coord, wall_y_coord, room_x_coord, room_y_coord);
   while (ros::ok())
   {
     while (markers_pub.getNumSubscribers() < 1)
